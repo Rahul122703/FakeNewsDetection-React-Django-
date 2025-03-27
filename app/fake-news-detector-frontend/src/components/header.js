@@ -1,109 +1,50 @@
-import {React} from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
-
-import  { LinkContainer } from 'react-router-bootstrap';
-
-function Header(props) {
-
-    const { activeContainer } = props;
-
+function Header({ activeContainer }) {
     return (
-        <header>
-            <Container>
-                <Navbar bg="" expand="lg">
-                    <Container>
-                        <LinkContainer to='/'>
-                            <Navbar.Brand href="/">
-                                <img src={process.env.PUBLIC_URL + '/logo.png'} height={27} className='logo-image' alt="Logo"></img>
-                                <span style={{fontWeight: 600, color: '#136996'}}>News</span> <span style={{color: '#48a2f8'}}>Guardian</span>
-                            </Navbar.Brand>
-                        </LinkContainer>
-                        <Navbar.Toggle aria-controls="hearder-navbar" />
-                        <Navbar.Collapse id="hearder-navbar" className="justify-content-end">
-                            <Nav>
-                                <NavDropdown title="News Categories" id="nav-dropdown">
-                                    <LinkContainer to='/category/sport'>
-                                        <NavDropdown.Item eventKey="4.1">Sport</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/world'>
-                                        <NavDropdown.Item eventKey='4.2'>World</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/society'>
-                                        <NavDropdown.Item eventKey='4.3'>Society</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/books'>
-                                        <NavDropdown.Item eventKey='4.3'>Books</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/lifeandstyle'>
-                                        <NavDropdown.Item eventKey='4.3'>Life and Style</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/artanddesign'>
-                                        <NavDropdown.Item eventKey='4.3'>Art and Design</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/usnews'>
-                                        <NavDropdown.Item eventKey='4.3'>US news</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/commentisfree'>
-                                        <NavDropdown.Item eventKey='4.3'>Comment Is Free</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/fashion'>
-                                        <NavDropdown.Item eventKey='4.3'>Fashion</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/news'>
-                                        <NavDropdown.Item eventKey='4.3'>News</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/education'>
-                                        <NavDropdown.Item eventKey='4.3'>Education</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/politics'>
-                                        <NavDropdown.Item eventKey='4.3'>Politics</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/tvandradio'>
-                                        <NavDropdown.Item eventKey='4.3'>TV and Radio</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/business'>
-                                        <NavDropdown.Item eventKey='4.3'>Business</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/uknews'>
-                                        <NavDropdown.Item eventKey='4.3'>UK News</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/environment'>
-                                        <NavDropdown.Item eventKey='4.3'>Environment</NavDropdown.Item>
-                                    </LinkContainer>
-                                    <LinkContainer to='/category/football'>
-                                        <NavDropdown.Item eventKey='4.3'>Football</NavDropdown.Item>
-                                    </LinkContainer>
-                                </NavDropdown>
-                            </Nav>
-                            <Nav>
-                                <LinkContainer to='/checkbytitle'>
-                                    <Nav.Link className={activeContainer === 2 ? 'active-link' : 'inactive-link'}>
-                                        <div>
-                                            <li>
-                                                <div>Check News By Title</div>
-                                            </li>
-                                        </div>
-                                    </Nav.Link>
-                                </LinkContainer>
-                            </Nav>
-                            <Nav>
-                                <LinkContainer to='/newsquiz'>
-                                    <Nav.Link className={activeContainer === 3 ? 'active-link' : 'inactive-link'}>
-                                        <div>
-                                            <li>
-                                                <div>News Quiz</div>
-                                            </li>
-                                        </div>
-                                    </Nav.Link>
-                                </LinkContainer>
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
-            </Container>
+        <header className="bg-white shadow-md py-4">
+            <div className="container mx-auto flex justify-between items-center px-4">
+                <Link to="/" className="flex items-center space-x-2">
+                    <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className="h-7" />
+                    <span className="font-semibold text-blue-700">News</span>
+                    <span className="text-blue-400">Guardian</span>
+                </Link>
+                
+                <nav className="hidden md:flex space-x-6">
+                    <div className="relative group">
+                        <button className="text-gray-700 font-medium focus:outline-none">News Categories</button>
+                        <div className="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                            {[
+                                { path: "/category/sport", label: "Sport" },
+                                { path: "/category/world", label: "World" },
+                                { path: "/category/society", label: "Society" },
+                                { path: "/category/books", label: "Books" },
+                                { path: "/category/lifeandstyle", label: "Life and Style" },
+                                { path: "/category/artanddesign", label: "Art and Design" },
+                                { path: "/category/usnews", label: "US News" },
+                                { path: "/category/commentisfree", label: "Comment Is Free" },
+                                { path: "/category/fashion", label: "Fashion" },
+                                { path: "/category/news", label: "News" },
+                                { path: "/category/education", label: "Education" },
+                                { path: "/category/politics", label: "Politics" },
+                                { path: "/category/tvandradio", label: "TV and Radio" },
+                                { path: "/category/business", label: "Business" },
+                                { path: "/category/uknews", label: "UK News" },
+                                { path: "/category/environment", label: "Environment" },
+                                { path: "/category/football", label: "Football" },
+                            ].map((item, index) => (
+                                <Link key={index} to={item.path} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">{item.label}</Link>
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <Link to="/checkbytitle" className={activeContainer === 2 ? "text-blue-500 font-semibold" : "text-gray-700"}>Check News By Title</Link>
+                    <Link to="/newsquiz" className={activeContainer === 3 ? "text-blue-500 font-semibold" : "text-gray-700"}>News Quiz</Link>
+                </nav>
+            </div>
         </header>
-    )
-};
+    );
+}
 
 export default Header;

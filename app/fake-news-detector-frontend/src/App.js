@@ -16,11 +16,6 @@ const router = createBrowserRouter([
   },
 
   {
-    path: '/newsquiz',
-    element: <NewsQuiz />,
-  },
-
-  {
     path: '/checkbytitle',
     element: <CheckByTitle />,
   },

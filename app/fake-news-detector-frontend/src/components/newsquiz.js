@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './header';
 import Axios from 'axios';
-import { Container, Button } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 
 function NewsQuiz() {
@@ -20,7 +19,7 @@ function NewsQuiz() {
 
   useEffect(() => {
     fetchQuizData();
-  }, []); // Fetch initial quiz data on component mount
+  }, []);
 
   const fetchQuizData = () => {
     Axios.get('http://127.0.0.1:8000/api/quiz/')
@@ -49,67 +48,59 @@ function NewsQuiz() {
   };
 
   const getNewQuiz = () => {
-    fetchQuizData(); // Fetch a new quiz when the button is clicked
-    setSelectedAnswer(''); // Reset the selected answer
+    fetchQuizData();
+    setSelectedAnswer('');
   };
 
   return (
     <>
       <Header activeContainer={stage} />
-      <Container className='news-quiz-container'>
-        <div className='div-iqyla'>
-          <h4>{newsForQuiz.news_title}</h4>
-        </div>
-        <div className='div-iqpls'>
-          <p>{newsForQuiz.news_description}</p>
+      <div className="max-w-2xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md mt-6">
+        <h4 className="text-xl font-bold text-center mb-4">{newsForQuiz.news_title}</h4>
+        <p className="text-gray-700 text-center mb-4">{newsForQuiz.news_description}</p>
+
+        <div className="flex flex-col space-y-4">
+          <label className="flex items-center space-x-2">
+            <input
+              type="radio"
+              value="True"
+              name="quiz"
+              className="form-radio h-5 w-5 text-blue-600"
+              checked={selectedAnswer === 'True'}
+              onChange={handleOptionChange}
+            />
+            <span className="text-lg">Real News</span>
+          </label>
+          
+          <label className="flex items-center space-x-2">
+            <input
+              type="radio"
+              value="False"
+              name="quiz"
+              className="form-radio h-5 w-5 text-red-600"
+              checked={selectedAnswer === 'False'}
+              onChange={handleOptionChange}
+            />
+            <span className="text-lg">Fake News</span>
+          </label>
         </div>
 
-        <div className="radiogroup">
-          <div className='div-oqapl'>
-              <div className='div-ioalp'>
-                <div className="wrapper">
-                  <input
-                  className='state'
-                    type='radio'
-                    value='True'
-                    name="app"
-                    id="a"
-                    checked={selectedAnswer === 'True'}
-                    onChange={handleOptionChange}
-                  />
-                  <label className="label" for="a">
-                    <div className="indicator"></div>
-                    <span className="text">Real News</span>
-                  </label>
-                </div>
-              <div className="wrapper">
-                  <input
-                  className='state'
-                    type='radio'
-                    value='False'
-                    name="app"
-                    id="b"
-                    checked={selectedAnswer === 'False'}
-                    onChange={handleOptionChange}
-                  />
-                  <label className="label" for="b">
-                    <div className="indicator"></div>
-                    <span className="text">Fake News</span>
-                  </label>
-              </div>
-            </div>
-            <div className='div-oapql'>
-              <Button variant='primary' type='submit' onClick={checkAnswer} className='button-17'>
-                Ok
-              </Button>
-              <Button onClick={getNewQuiz} variant='light' style={{ marginLeft: '10px' }} className='button-17'>
-                Get New Quiz
-              </Button>
-            </div>
-          </div>
+        <div className="flex justify-center space-x-4 mt-6">
+          <button
+            onClick={checkAnswer}
+            className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600"
+          >
+            Ok
+          </button>
+          
+          <button
+            onClick={getNewQuiz}
+            className="bg-gray-400 text-white px-6 py-2 rounded-lg hover:bg-gray-500"
+          >
+            Get New Quiz
+          </button>
         </div>
-      </Container>
-
+      </div>
       <ToastContainer />
     </>
   );
