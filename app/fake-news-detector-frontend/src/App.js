@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom';
 
 import Home from './components/home';
-import NewsQuiz from './components/newsquiz';
 import CheckByTitle from './components/checkbytitle';
 import CategoryContainer from './components/category';
 
