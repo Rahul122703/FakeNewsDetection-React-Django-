@@ -1,22 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Header({ activeContainer }) {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
-        <header className="bg-white shadow-md py-4">
-            <div className="container mx-auto flex justify-between items-center px-6">
-                {/* Logo */}
+        <header className="sticky top-0 z-50 bg-white shadow-md">
+            <div className="container mx-auto flex justify-between items-center px-6 py-4">
                 <Link to="/" className="flex items-center space-x-2">
-                    <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className="h-8" />
-                    <span className="font-semibold text-gray-900 text-lg">News</span>
-                    <span className="text-gray-500 text-lg">Guardian</span>
+                    <img src={process.env.PUBLIC_URL + "/logo.png"} alt="Logo" className="h-10" />
+                    <span className="font-bold text-xl text-gray-900 tracking-wide">FakeNewsMiniProject</span>
                 </Link>
 
-                {/* Navigation */}
-                <nav className="hidden md:flex items-center space-x-6">
-                    {/* Category Dropdown */}
-                    <select 
-                        className="bg-white border border-gray-300 rounded-lg px-3 py-2 text-gray-700 focus:ring focus:ring-blue-300 outline-none"
+                <button className="md:hidden text-gray-700" onClick={() => setIsOpen(!isOpen)}>
+                    {isOpen ? "✖" : "☰"}
+                </button>
+
+                <nav className={`md:flex items-center space-x-6 ${isOpen ? "block" : "hidden"} md:block absolute md:relative top-16 md:top-0 left-0 w-full md:w-auto bg-white md:bg-transparent p-6 md:p-0 shadow-md md:shadow-none`}>
+                    {/* <select 
+                        className="bg-white border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 outline-none transition-transform hover:scale-105"
                         onChange={(e) => window.location.href = e.target.value}
                     >
                         <option value="" disabled>News Categories</option>
@@ -41,12 +43,11 @@ function Header({ activeContainer }) {
                         ].map((item, index) => (
                             <option key={index} value={item.path}>{item.label}</option>
                         ))}
-                    </select>
+                    </select> */}
 
-                    {/* Links */}
                     <Link 
                         to="/checkbytitle" 
-                        className={`px-3 py-2 text-sm font-medium transition ${activeContainer === 2 ? "text-blue-600 font-semibold" : "text-gray-700 hover:text-blue-500"}`}
+                        className={`px-4 py-2 text-sm font-medium rounded-lg transition hover:bg-gray-100 ${activeContainer === 2 ? "bg-gray-200 text-gray-900" : "text-gray-700"}`}
                     >
                         Check News By Title
                     </Link>

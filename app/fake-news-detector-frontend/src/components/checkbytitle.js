@@ -15,7 +15,7 @@ function CheckByTitle() {
     e.preventDefault();
     setIsLoading(true);
 
-    if (inputNewsTitle.length < 1) {
+    if (inputNewsTitle.trim() === '') {
       toast.error('Enter some text!');
       setIsLoading(false);
       return;
@@ -25,10 +25,10 @@ function CheckByTitle() {
       .then((response) => {
         if (response.data.prediction === true) {
           setPredictedValue('True');
-          toast.success("Real news!");
+          toast.success('Real news!');
         } else {
           setPredictedValue('False');
-          toast.error("Fake news!");
+          toast.error('Fake news!');
         }
       })
       .catch((error) => {
@@ -43,34 +43,32 @@ function CheckByTitle() {
   return (
     <>
       <Header activeContainer={stage} />
-      <div className="w-full max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold text-center mb-4">Check News by Title</h2>
-        <form onSubmit={handleSubmit}>
-          <label className="block text-gray-700 font-medium mb-2">News Title</label>
-          <textarea
-            className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter news title..."
-            rows={5}
-            onChange={(e) => setNewsTitle(e.target.value)}
-          ></textarea>
+      <div className="max-w-xl mx-auto mt-10 bg-white shadow-lg rounded-xl p-6 space-y-4">
+        <h2 className="text-2xl font-semibold text-center text-gray-800">Check News by Title</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-gray-600 font-medium mb-2">News Title</label>
+            <textarea
+              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              placeholder="Enter news title..."
+              rows={4}
+              onChange={(e) => setNewsTitle(e.target.value)}
+            ></textarea>
+          </div>
           <button
             type="submit"
-            className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200"
+            className="w-full bg-blue-500 text-white font-medium py-2 rounded-lg hover:bg-blue-600 transition-all"
           >
             {isLoading ? 'Checking...' : 'Check'}
           </button>
         </form>
-      </div>
-
-      <div className="w-full max-w-2xl mx-auto mt-4 p-4 text-center">
-        {predictedValue === 'True' && (
-          <div className="text-green-600 font-semibold text-lg">✔️ Predicted as Real News!</div>
-        )}
-        {predictedValue === 'False' && (
-          <div className="text-red-600 font-semibold text-lg">❌ Predicted as Fake News!</div>
+        {predictedValue && (
+          <div className={`text-lg font-semibold text-center py-2 rounded-lg ${predictedValue === 'True' ? 'text-green-600 bg-green-100' : 'text-red-600 bg-red-100'}`}>
+            {predictedValue === 'True' ? '✔️ Predicted as Real News!' : '❌ Predicted as Fake News!'}
+          </div>
         )}
       </div>
-      <ToastContainer />
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar closeOnClick pauseOnHover draggable />
     </>
   );
 }

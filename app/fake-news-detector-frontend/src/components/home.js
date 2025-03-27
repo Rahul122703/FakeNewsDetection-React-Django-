@@ -39,7 +39,8 @@ function Home() {
   return (
     <>
       <Header activeContainer={1} />
-      <div className="px-10 py-6 bg-gray-100 min-h-screen">
+      <div className="px-10 py-6 bg-gray-100 min-h-screen ">
+        <h3 className="text-lg text-center text-gray-600 mb-6">LIVE NEWS</h3>
         {liveNews.length >= 10 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {liveNews.slice(0, 10).map((news, index) => (
