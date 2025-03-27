@@ -39,22 +39,21 @@ function Home() {
   return (
     <>
       <Header activeContainer={1} />
-      <div className="p-6">
-        <div className="flex items-center mb-4">
-          <img src={`${process.env.PUBLIC_URL}/live.gif`} className="h-8" alt="Live News" />
-        </div>
-
+      <div className="px-10 py-6 bg-gray-100 min-h-screen">
         {liveNews.length >= 10 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {liveNews.slice(0, 10).map((news, index) => (
-              <div key={index} className="p-4 border rounded-lg shadow-lg">
+              <div
+                key={index}
+                className="p-3 border rounded-lg shadow-md bg-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer w-80"
+              >
                 {news.img_url !== 'None' && (
-                  <img src={news.img_url} className="w-full h-40 object-cover mb-2" alt="News" />
+                  <img src={news.img_url} className="w-full h-40 object-cover rounded-md mb-2" alt="News" />
                 )}
-                <a href={news.web_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold">
+                <a href={news.web_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold">
                   {news.title}
                 </a>
-                <div className="text-gray-500 text-sm mt-2">
+                <div className="text-gray-500 text-sm mt-1">
                   {new Date(news.publication_date).toLocaleString()}
                 </div>
                 <div className={`mt-2 p-2 text-white text-center rounded ${news.prediction ? 'bg-green-500' : 'bg-red-500'}`}>
@@ -72,16 +71,19 @@ function Home() {
           <hr className="border-gray-300 my-2" />
         </div>
         {mustSeeNews.length >= 4 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-full border border-none  mx-auto flex flex-row justify-between m-auto w-[80rem]">
             {mustSeeNews.slice(0, 4).map((news, index) => (
-              <div key={index} className="p-4 border rounded-lg shadow-lg">
+              <div
+                key={index}
+                className="p-4 border rounded-lg shadow-md bg-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer w-72"
+              >
                 {news.img_url !== 'None' && (
-                  <img src={news.img_url} className="w-full h-40 object-cover mb-2" alt="Must See News" />
+                  <img src={news.img_url} className="w-full h-40 object-cover rounded-md mb-2" alt="Must See News" />
                 )}
-                <a href={news.web_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold">
+                <a href={news.web_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold block">
                   {news.title}
                 </a>
-                <div className="text-gray-500 text-sm mt-2">
+                <div className="text-gray-500 text-sm mt-1">
                   {new Date(news.publication_date).toLocaleString()}
                 </div>
                 <div className={`mt-2 p-2 text-white text-center rounded ${news.prediction ? 'bg-green-500' : 'bg-red-500'}`}>
