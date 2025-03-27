@@ -5,7 +5,7 @@ import { Check2, X } from 'react-bootstrap-icons';
 import Axios from 'axios';
 
 function Home() {
-  document.title = 'News Guardian | Home';
+  document.title = 'Mini Project';
   let stage = 1;
 
   const [liveNewsData, setLiveNewsData] = useState([]);
@@ -88,7 +88,7 @@ function Home() {
                 <Row className='nr-fkmwq'>
                   <div className='div-oakpq'>
                     <Col xs={6} md={4} className='cl-ksmao'>
-                      <h4 className='h-fowjs'>{liveNewsData[0].title}</h4>
+                      <h4 className='h-fowjs'><a herf={liveNewsData[0].web_url}>{liveNewsData[0].title}</a></h4>
                     </Col>
                     { liveNewsData[0].img_url === 'None' ? 
                       null :
@@ -128,7 +128,9 @@ function Home() {
                         </Row>
                     ) }
                     <Row>
-                        <h5>{liveNewsData[1].title}</h5>
+                    <a href={liveNewsData[1].web_url} target="_blank" rel="noopener noreferrer">
+                      <h5>{liveNewsData[1].title}</h5>
+                    </a>
                     </Row>
                   </div>
                   <div className='div-kjpql'>
@@ -161,7 +163,7 @@ function Home() {
                       </Row>
                     )}
                     <Row>
-                      <h5>{news.title}</h5>
+                      <h5><a href= {news.web_url}  target="_blank" rel="noopener noreferrer">{news.title}</a></h5>
                     </Row>
                   </div>
                   <div className="div-kjpql">
@@ -196,7 +198,7 @@ function Home() {
                       </Row>
                     )}
                     <Row>
-                      <h5>{news.title}</h5>
+                      <a href={news.web_url}  target="_blank" rel="noopener noreferrer"><h5>{news.title}</h5></a>
                     </Row>
                   </div>
                   <div className="div-kjpql">
@@ -243,7 +245,7 @@ function Home() {
                         </Row>
                       ) : null}
                       <Row>
-                        <h5>{news.title}</h5>
+                        <a href = {news.web_url}  target="_blank" rel="noopener noreferrer"><h5>{news.title}</h5></a>
                       </Row>
                     </div>
                     <div className="div-kjpql">
@@ -294,7 +296,7 @@ function Home() {
                         </Row>
                       ) : null}
                       <Row>
-                        <h5>{news.title}</h5>
+                        <a href = {news.web_url}  target="_blank" rel="noopener noreferrer"><h5>{news.title}</h5></a>
                       </Row>
                     </div>
                     <div className="div-kjpql">
