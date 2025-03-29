@@ -677,3 +677,31 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,python,django,react
+
+# Ignore Python cache and compiled files
+image_detection/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore environment files
+.env
+.venv/
+venv/
+
+# Ignore dataset folders inside image_detection
+image_detection/dataset/
+image_detection/dataset2/
+
+# Ignore model weights (large files)
+image_detection/*.pth
+
+# Ignore log and temporary files
+*.log
+*.tmp
+*.bak
+
+# Ignore Streamlit and FastAPI cache
+.streamlit/
+*.db
+
