@@ -13,3 +13,11 @@ django-cors-headers
 psycopg2
 scikit-learn
 requests
+bs4
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+wordcloud
+nltk
