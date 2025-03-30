@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "./header";
 import Axios from "axios";
 import { useApiContext } from "../apiContext";
+import Loader from "./loader";
 
 function CheckByTitle() {
   document.title = "Check news by title";
@@ -12,6 +13,7 @@ function CheckByTitle() {
   const [predictedValue, setPredictedValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { api_link } = useApiContext();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -64,10 +66,11 @@ function CheckByTitle() {
           <button
             type="submit"
             className="w-full bg-blue-500 text-white font-medium py-2 rounded-lg hover:bg-blue-600 transition-all">
-            {isLoading ? "Checking..." : "Check"}
+            {isLoading ? <Loader /> : "Check"}
           </button>
         </form>
-        {predictedValue && (
+        {isLoading && <Loader />}
+        {!isLoading && predictedValue && (
           <div
             className={`text-lg font-semibold text-center py-2 rounded-lg ${
               predictedValue === "True"
