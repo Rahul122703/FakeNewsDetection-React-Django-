@@ -132,7 +132,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+
 .venv
 env/
 venv/
@@ -686,7 +686,6 @@ image_detection/__pycache__/
 *.pyd
 
 # Ignore environment files
-.env
 .venv/
 venv/
 

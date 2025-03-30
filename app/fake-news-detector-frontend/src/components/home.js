@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import Header from './header';
-import Axios from 'axios';
+import React, { useState, useEffect } from "react";
+import Header from "./header";
+import Axios from "axios";
+import { useApiContext } from "../apiContext";
 
 function Home() {
-  document.title = 'Mini Project';
+  document.title = "Mini Project";
   const [liveNews, setLiveNews] = useState([]);
   const [mustSeeNews, setMustSeeNews] = useState([]);
   const [allNews, setAllNews] = useState([]);
-  const categories = ['Sport', 'Lifestyle', 'Arts', 'News'];
-
+  const categories = ["Sport", "Lifestyle", "Arts", "News"];
+  const { api_link } = useApiContext();
   useEffect(() => {
     fetchNewsData();
     const intervalId = setInterval(fetchNewsData, 10000);
@@ -16,17 +17,17 @@ function Home() {
   }, []);
 
   const fetchNewsData = () => {
-    Axios.get('http://127.0.0.1:8000/api/live/')
+    Axios.get(`${api_link}/api/live/`)
       .then((res) => setLiveNews(res.data))
-      .catch((err) => console.error('Error fetching live news:', err));
+      .catch((err) => console.error("Error fetching live news:", err));
 
-    Axios.get('http://127.0.0.1:8000/api/category/News/')
+    Axios.get(`${api_link}/api/category/News/`)
       .then((res) => setMustSeeNews(res.data))
-      .catch((err) => console.error('Error fetching must-see news:', err));
+      .catch((err) => console.error("Error fetching must-see news:", err));
 
     Promise.all(
       categories.map((category) =>
-        Axios.get(`http://127.0.0.1:8000/api/category/${category}/`)
+        Axios.get(`${api_link}/api/category/${category}/`)
           .then((res) => (res.data.length ? res.data[0] : null))
           .catch((err) => {
             console.error(`Error fetching ${category} news:`, err);
@@ -46,19 +47,31 @@ function Home() {
             {liveNews.slice(0, 10).map((news, index) => (
               <div
                 key={index}
-                className="p-3 border rounded-lg shadow-md bg-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer w-80"
-              >
-                {news.img_url !== 'None' && (
-                  <img src={news.img_url} className="w-full h-40 object-cover rounded-md mb-2" alt="News" />
+                className="p-3 border rounded-lg shadow-md bg-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer w-80">
+                {news.img_url !== "None" && (
+                  <img
+                    src={news.img_url}
+                    className="w-full h-40 object-cover rounded-md mb-2"
+                    alt="News"
+                  />
                 )}
-                <a href={news.web_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold">
+                <a
+                  href={news.web_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 font-semibold">
                   {news.title}
                 </a>
                 <div className="text-gray-500 text-sm mt-1">
                   {new Date(news.publication_date).toLocaleString()}
                 </div>
-                <div className={`mt-2 p-2 text-white text-center rounded ${news.prediction ? 'bg-green-500' : 'bg-red-500'}`}>
-                  {news.prediction ? '✔ Predicted as Real News' : '✖ Predicted as Fake News'}
+                <div
+                  className={`mt-2 p-2 text-white text-center rounded ${
+                    news.prediction ? "bg-green-500" : "bg-red-500"
+                  }`}>
+                  {news.prediction
+                    ? "✔ Predicted as Real News"
+                    : "✖ Predicted as Fake News"}
                 </div>
               </div>
             ))}
@@ -76,19 +89,31 @@ function Home() {
             {mustSeeNews.slice(0, 4).map((news, index) => (
               <div
                 key={index}
-                className="p-4 border rounded-lg shadow-md bg-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer w-72"
-              >
-                {news.img_url !== 'None' && (
-                  <img src={news.img_url} className="w-full h-40 object-cover rounded-md mb-2" alt="Must See News" />
+                className="p-4 border rounded-lg shadow-md bg-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer w-72">
+                {news.img_url !== "None" && (
+                  <img
+                    src={news.img_url}
+                    className="w-full h-40 object-cover rounded-md mb-2"
+                    alt="Must See News"
+                  />
                 )}
-                <a href={news.web_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold block">
+                <a
+                  href={news.web_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 font-semibold block">
                   {news.title}
                 </a>
                 <div className="text-gray-500 text-sm mt-1">
                   {new Date(news.publication_date).toLocaleString()}
                 </div>
-                <div className={`mt-2 p-2 text-white text-center rounded ${news.prediction ? 'bg-green-500' : 'bg-red-500'}`}>
-                  {news.prediction ? '✔ Predicted as Real News' : '✖ Predicted as Fake News'}
+                <div
+                  className={`mt-2 p-2 text-white text-center rounded ${
+                    news.prediction ? "bg-green-500" : "bg-red-500"
+                  }`}>
+                  {news.prediction
+                    ? "✔ Predicted as Real News"
+                    : "✖ Predicted as Fake News"}
                 </div>
               </div>
             ))}
