@@ -18,3 +18,8 @@ dj_database_url
 dotenv
 whitenoise
 bs4
+
+
+# RENDER INPUTS
+# app/FakeNewsDetectorAPI/    -> src
+# gunicorn FakeNewsDetectorAPI.wsgi:application   -> start command
