@@ -19,3 +19,23 @@ transformers
 uvicorn
 torchvision
 streamlit
+
+# Additional dependencies (This Below list is for python notebook)
+beautifulsoup4
+certifi
+charset-normalizer
+click
+filelock
+idna
+joblib
+markupsafe
+packaging
+protobuf
+pyparsing
+python-dateutil
+pytz
+regex
+six
+threadpoolctl
+tqdm
+urllib3
