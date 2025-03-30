@@ -17,3 +17,4 @@ gunicorn
 dj_database_url
 dotenv
 whitenoise
+bs4
