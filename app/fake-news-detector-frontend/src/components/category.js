@@ -5,10 +5,13 @@ import Axios from "axios";
 import Header from "./header";
 import { useApiContext } from "../apiContext";
 
+import Loader from "./Loader";
 const CategoryContainer = () => {
   const { category } = useParams();
   const [newsData, setNewsData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { api_link } = useApiContext();
+
   const fetchNewsData = () => {
     const capitalizedCategory =
       category.charAt(0).toUpperCase() + category.slice(1);
@@ -19,7 +22,8 @@ const CategoryContainer = () => {
           toast.error("Not enough data");
         }
       })
-      .catch((error) => console.error("Error fetching data:", error));
+      .catch((error) => console.error("Error fetching data:", error))
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
@@ -30,7 +34,9 @@ const CategoryContainer = () => {
     <>
       <Header activeContainer={1} />
       <div className="container mx-auto p-4">
-        {newsData.length > 9 ? (
+        {loading ? (
+          <Loader />
+        ) : newsData.length > 9 ? (
           <div className="grid gap-6">
             {/* Main news item */}
             <div className="flex flex-col md:flex-row bg-gray-100 p-4 rounded-lg shadow-md">
