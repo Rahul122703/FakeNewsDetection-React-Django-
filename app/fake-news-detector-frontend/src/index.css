@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+a {
+    text-decoration: none;  /* Removes underline */
+    color: inherit;         /* Uses the text color of the parent element */
+    background: none;       /* Removes any background */
+    border: none;           /* Removes any border */
+    outline: none;          /* Removes the focus outline */
+}

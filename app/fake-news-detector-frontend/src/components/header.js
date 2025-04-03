@@ -44,7 +44,12 @@ function Header({ activeContainer }) {
                             <option key={index} value={item.path}>{item.label}</option>
                         ))}
                     </select> */}
-
+                    <Link 
+                        to="/checkbyimage" 
+                        className={`px-4 py-2 text-sm font-medium rounded-lg transition hover:bg-gray-100 ${activeContainer === 3 ? "bg-gray-200 text-gray-900" : "text-gray-700"}`}
+                    >
+                        Check News By Image
+                    </Link>
                     <Link 
                         to="/checkbytitle" 
                         className={`px-4 py-2 text-sm font-medium rounded-lg transition hover:bg-gray-100 ${activeContainer === 2 ? "bg-gray-200 text-gray-900" : "text-gray-700"}`}

@@ -7,7 +7,7 @@ import {
 import Home from './components/home';
 import CheckByTitle from './components/checkbytitle';
 import CategoryContainer from './components/category';
-
+import ImageUpload from './components/imagedetection';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -22,6 +22,11 @@ const router = createBrowserRouter([
   {
     path: '/category/:category',
     element: <CategoryContainer />,
+
+  },
+  {
+    path: '/checkbyimage',
+    element: <ImageUpload />,
 
   }
 ]);
