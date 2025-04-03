@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'core',
     'core.usercheckbytitle',
     'core.livenews',
+    'core.imagedetection',
 ]
 
 MIDDLEWARE = [
