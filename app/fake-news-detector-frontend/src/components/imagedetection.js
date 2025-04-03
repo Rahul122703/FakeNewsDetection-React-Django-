@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import { useDropzone } from "react-dropzone";
 import Header from "./header";
 
 const ImageUpload = () => {
@@ -7,15 +8,8 @@ const ImageUpload = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const API_URL = process.env.REACT_APP_IMAGE_API_URL || "http://127.0.0.1:5000";
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setImage(URL.createObjectURL(file));
-      handleUpload(file);
-    }
-  };
+  const API_URL = process.env.REACT_APP_IMAGE_API_URL ;
+  //  const API_URL = "http://127.0.0.1:5000";
 
   const handleUpload = async (file) => {
     const formData = new FormData();
@@ -36,7 +30,7 @@ const ImageUpload = () => {
       }
 
       const data = await response.json();
-      setResult(data.prediction); 
+      setResult(data.prediction);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -44,14 +38,31 @@ const ImageUpload = () => {
     }
   };
 
+  const onDrop = useCallback((acceptedFiles) => {
+    if (acceptedFiles.length > 0) {
+      const file = acceptedFiles[0];
+      setImage(URL.createObjectURL(file));
+      handleUpload(file);
+    }
+  }, []);
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: "image/*",
+    maxFiles: 1,
+  });
+
   return (
     <>
       <Header activeContainer={1} />
       <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
-        <label className="w-full max-w-md p-10 text-center border-2 border-dashed border-gray-400 rounded-lg cursor-pointer bg-white shadow-md">
+        <div
+          {...getRootProps()}
+          className="w-full max-w-md p-10 text-center border-2 border-dashed border-gray-400 rounded-lg cursor-pointer bg-white shadow-md"
+        >
+          <input {...getInputProps()} />
           <span className="text-gray-600">Drag & drop an image here, or click to select one</span>
-          <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
-        </label>
+        </div>
 
         {image && (
           <div className="mt-4">
