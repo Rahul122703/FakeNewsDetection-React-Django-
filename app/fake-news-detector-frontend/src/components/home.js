@@ -55,11 +55,11 @@ function Home() {
               LIVE NEWS
             </h3>
             {liveNews.length >= 10 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <div className="flex flex-row flex-wrap justiy-center items-center max-w-5xl mx-auto">
                 {liveNews.slice(0, 10).map((news, index) => (
                   <div
                     key={index}
-                    className="p-3 border rounded-lg shadow-md bg-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer w-80">
+                    className="p-3 border rounded-lg shadow-md bg-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer w-80 m-[0.5rem]">
                     {news.img_url !== "None" && (
                       <img
                         src={news.img_url}
@@ -97,11 +97,11 @@ function Home() {
               <hr className="border-gray-300 my-2" />
             </div>
             {mustSeeNews.length >= 4 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-full border border-none mx-auto flex flex-row justify-between m-auto w-[80rem]">
+              <div className="flex flex-row flex-wrap justiy-center items-center max-w-5xl mx-auto">
                 {mustSeeNews.slice(0, 4).map((news, index) => (
                   <div
                     key={index}
-                    className="p-4 border rounded-lg shadow-md bg-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer w-72">
+                    className="p-3 border rounded-lg shadow-md bg-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer w-80 m-[0.5rem]">
                     {news.img_url !== "None" && (
                       <img
                         src={news.img_url}
